@@ -1,0 +1,111 @@
+{
+  "hero": {
+    "name": "Alex Johnson",
+    "title": "Computer Science Student",
+    "subtitle": "Full-Stack Developer & Problem Solver",
+    "description": "Passionate about creating innovative solutions and learning cutting-edge technologies. Currently pursuing my Bachelor's in Computer Science with a focus on web development and software engineering.",
+    "image": "/api/placeholder/400/400",
+    "resumeUrl": "/resume.pdf",
+    "social": {
+      "github": "https://github.com/alexjohnson",
+      "linkedin": "https://linkedin.com/in/alexjohnson",
+      "email": "alex.johnson@email.com",
+      "twitter": "https://twitter.com/alexjohnson"
+    }
+  },
+  "about": {
+    "title": "About Me",
+    "description": "I'm a dedicated Computer Science student with a passion for technology and innovation. My journey in programming started in high school, and since then, I've been constantly learning and building projects that solve real-world problems.",
+    "image": "/api/placeholder/300/400",
+    "skills": [
+      {
+        "category": "Frontend",
+        "items": ["React", "TypeScript", "HTML5", "CSS3", "Tailwind CSS", "Next.js"]
+      },
+      {
+        "category": "Backend",
+        "items": ["Node.js", "Express", "Python", "Django", "PostgreSQL", "MongoDB"]
+      },
+      {
+        "category": "Tools & Others",
+        "items": ["Git", "Docker", "AWS", "Figma", "Linux", "Agile"]
+      }
+    ],
+    "education": {
+      "degree": "Bachelor of Science in Computer Science",
+      "university": "State University",
+      "year": "2022 - 2026",
+      "gpa": "3.8/4.0",
+      "relevantCourses": [
+        "Data Structures & Algorithms",
+        "Database Systems",
+        "Software Engineering",
+        "Web Development",
+        "Machine Learning",
+        "Computer Networks"
+      ]
+    },
+    "achievements": [
+      "Dean's List for 3 consecutive semesters",
+      "Winner of University Hackathon 2024",
+      "President of Computer Science Club",
+      "Google Developer Student Club Member"
+    ]
+  },
+  "projects": [
+    {
+      "id": 1,
+      "title": "E-Commerce Platform",
+      "description": "A full-stack e-commerce platform built with React, Node.js, and PostgreSQL. Features include user authentication, product catalog, shopping cart, and payment integration.",
+      "image": "/api/placeholder/600/400",
+      "technologies": ["React", "Node.js", "PostgreSQL", "Stripe API", "JWT"],
+      "githubUrl": "https://github.com/alexjohnson/ecommerce-platform",
+      "liveUrl": "https://ecommerce-demo.vercel.app",
+      "featured": true
+    },
+    {
+      "id": 2,
+      "title": "Task Management App",
+      "description": "A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.",
+      "image": "/api/placeholder/600/400",
+      "technologies": ["React", "Firebase", "Material-UI", "Socket.io"],
+      "githubUrl": "https://github.com/alexjohnson/task-manager",
+      "liveUrl": "https://taskmanager-demo.vercel.app",
+      "featured": true
+    },
+    {
+      "id": 3,
+      "title": "Weather Dashboard",
+      "description": "A responsive weather dashboard that displays current weather and forecasts for multiple cities with beautiful visualizations.",
+      "image": "/api/placeholder/600/400",
+      "technologies": ["React", "Chart.js", "OpenWeather API", "CSS3"],
+      "githubUrl": "https://github.com/alexjohnson/weather-dashboard",
+      "liveUrl": "https://weather-dashboard-demo.vercel.app",
+      "featured": false
+    },
+    {
+      "id": 4,
+      "title": "Machine Learning Classifier",
+      "description": "A machine learning project that classifies images using TensorFlow and provides a web interface for testing the model.",
+      "image": "/api/placeholder/600/400",
+      "technologies": ["Python", "TensorFlow", "Flask", "React", "scikit-learn"],
+      "githubUrl": "https://github.com/alexjohnson/ml-classifier",
+      "liveUrl": null,
+      "featured": false
+    }
+  ],
+  "contact": {
+    "title": "Get In Touch",
+    "description": "I'm always open to discussing new opportunities, collaborating on interesting projects, or just having a chat about technology. Feel free to reach out!",
+    "email": "alex.johnson@email.com",
+    "phone": "+1 (555) 123-4567",
+    "location": "San Francisco, CA",
+    "availability": "Available for internships and part-time opportunities",
+    "social": {
+      "github": "https://github.com/alexjohnson",
+      "linkedin": "https://linkedin.com/in/alexjohnson",
+      "twitter": "https://twitter.com/alexjohnson",
+      "instagram": "https://instagram.com/alexjohnson"
+    }
+  }
+}
