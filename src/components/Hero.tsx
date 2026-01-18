@@ -1,9 +1,15 @@
 import React from 'react'
 import { Github, Linkedin, Mail, Download, Twitter } from 'lucide-react'
 import data from '../../data.json'
+import type { PortfolioData } from '../types'
 
 const Hero: React.FC = () => {
-  const { hero } = data
+  const { hero } = data as PortfolioData;
+
+  // Don't render section if hero data is not present
+  if (!hero) {
+    return null;
+  }
 
   const socialLinks = [
     { icon: Github, url: hero.social.github, label: 'GitHub' },
