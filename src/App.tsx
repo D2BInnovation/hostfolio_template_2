@@ -1,8 +1,8 @@
-import React, { lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import data from './data.json';
+import data from '../data.json';
 import type { PortfolioData } from './types';
 
 // Dynamic imports for conditional rendering
