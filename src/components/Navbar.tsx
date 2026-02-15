@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Menu, X } from 'lucide-react'
+import type { PortfolioData } from '../types'
 import data from '../../data.json'
 
 const Navbar: React.FC = () => {
@@ -14,7 +15,7 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const { personal, about, projects, contact, hero, resume } = (data as any)
+  const { personal, about, projects, contact, hero, resume } = (data as PortfolioData)
 
   const navItems = []
   if (hero) navItems.push({ name: 'Home', href: '#hero' })

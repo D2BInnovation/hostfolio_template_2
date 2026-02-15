@@ -11,6 +11,7 @@ export interface HeroSection {
     email: string;
     twitter: string;
   };
+  resume?: string;
 }
 
 export interface SkillCategory {
@@ -55,4 +56,6 @@ export interface PortfolioData {
   about: AboutSection;
   projects: ProjectItem[];
   contact: ContactSection;
+  resume?: string;
+  personal?: any;
 }
