@@ -3,7 +3,7 @@ import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, Instagram } from 
 import data from '../../data.json'
 
 const Contact: React.FC = () => {
-  const { contact } = data
+  const { contact } = data as any
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -30,29 +30,29 @@ const Contact: React.FC = () => {
     {
       icon: Mail,
       label: 'Email',
-      value: contact.email,
-      href: `mailto:${contact.email}`
+      value: contact?.email,
+      href: contact?.email ? `mailto:${contact.email}` : null
     },
     {
       icon: Phone,
       label: 'Phone',
-      value: contact.phone,
-      href: `tel:${contact.phone}`
+      value: contact?.phone,
+      href: contact?.phone ? `tel:${contact.phone}` : null
     },
     {
       icon: MapPin,
       label: 'Location',
-      value: contact.location,
+      value: contact?.location,
       href: null
     }
-  ]
+  ].filter(info => info.value);
 
   const socialLinks = [
-    { icon: Github, url: contact.social.github, label: 'GitHub' },
-    { icon: Linkedin, url: contact.social.linkedin, label: 'LinkedIn' },
-    { icon: Twitter, url: contact.social.twitter, label: 'Twitter' },
-    { icon: Instagram, url: contact.social.instagram, label: 'Instagram' }
-  ]
+    { icon: Github, url: contact?.social?.github, label: 'GitHub' },
+    { icon: Linkedin, url: contact?.social?.linkedin, label: 'LinkedIn' },
+    { icon: Twitter, url: contact?.social?.twitter, label: 'Twitter' },
+    { icon: Instagram, url: contact?.social?.instagram, label: 'Instagram' }
+  ].filter(link => link.url);
 
   return (
     <section id="contact" className="py-20 bg-white">
@@ -60,10 +60,10 @@ const Contact: React.FC = () => {
         <div className="animate-fadeInUp">
           {/* Section Header */}
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">{contact.title}</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">{contact?.title || 'Get In Touch'}</h2>
             <div className="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              {contact.description}
+              {contact?.description || 'I would love to hear from you!'}
             </p>
           </div>
 
@@ -100,10 +100,12 @@ const Contact: React.FC = () => {
               </div>
 
               {/* Availability */}
-              <div className="bg-blue-50 p-6 rounded-xl animate-slideInLeft animation-delay-400">
-                <h4 className="text-lg font-semibold text-gray-900 mb-2">Availability</h4>
-                <p className="text-blue-700 font-medium">{contact.availability}</p>
-              </div>
+              {contact?.availability && (
+                <div className="bg-blue-50 p-6 rounded-xl animate-slideInLeft animation-delay-400">
+                  <h4 className="text-lg font-semibold text-gray-900 mb-2">Availability</h4>
+                  <p className="text-blue-700 font-medium">{contact.availability}</p>
+                </div>
+              )}
 
               {/* Social Links */}
               <div className="animate-slideInLeft animation-delay-600">
@@ -162,7 +164,7 @@ const Contact: React.FC = () => {
                       />
                     </div>
                   </div>
-                  
+
                   <div>
                     <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
                       Subject
@@ -178,7 +180,7 @@ const Contact: React.FC = () => {
                       placeholder="What's this about?"
                     />
                   </div>
-                  
+
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
                       Message
@@ -194,7 +196,7 @@ const Contact: React.FC = () => {
                       placeholder="Tell me about your project or just say hello!"
                     />
                   </div>
-                  
+
                   <button
                     type="submit"
                     className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 hover:scale-105 transition-all duration-200 flex items-center justify-center gap-2"

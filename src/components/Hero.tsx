@@ -12,11 +12,11 @@ const Hero: React.FC = () => {
   }
 
   const socialLinks = [
-    { icon: Github, url: hero.social.github, label: 'GitHub' },
-    { icon: Linkedin, url: hero.social.linkedin, label: 'LinkedIn' },
-    { icon: Twitter, url: hero.social.twitter, label: 'Twitter' },
-    { icon: Mail, url: `mailto:${hero.social.email}`, label: 'Email' }
-  ]
+    { icon: Github, url: hero.social?.github, label: 'GitHub' },
+    { icon: Linkedin, url: hero.social?.linkedin, label: 'LinkedIn' },
+    { icon: Twitter, url: hero.social?.twitter, label: 'Twitter' },
+    { icon: Mail, url: hero.social?.email ? `mailto:${hero.social.email}` : '#', label: 'Email' }
+  ].filter(link => link.url);
 
   return (
     <section id="hero" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 pt-20">

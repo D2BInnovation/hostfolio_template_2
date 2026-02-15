@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Menu, X } from 'lucide-react'
+import data from '../../data.json'
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -13,12 +14,17 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const navItems = [
-    { name: 'Home', href: '#hero' },
-    { name: 'About', href: '#about' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Contact', href: '#contact' }
-  ]
+  const { personal, about, projects, contact, hero, resume } = (data as any)
+
+  const navItems = []
+  if (hero) navItems.push({ name: 'Home', href: '#hero' })
+  if (about && (about.description || about.skills?.length > 0)) {
+    navItems.push({ name: 'About', href: '#about' })
+  }
+  if (projects && projects.length > 0) {
+    navItems.push({ name: 'Projects', href: '#projects' })
+  }
+  if (contact) navItems.push({ name: 'Contact', href: '#contact' })
 
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href)
@@ -30,14 +36,13 @@ const Navbar: React.FC = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 animate-slideDown ${
-        scrolled ? 'bg-white/90 backdrop-blur-md shadow-lg' : 'bg-transparent'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 animate-slideDown ${scrolled ? 'bg-white/90 backdrop-blur-md shadow-lg' : 'bg-transparent'
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="text-2xl font-bold text-blue-600 hover:scale-105 transition-transform duration-200">
-            Portfolio
+            {personal?.name || 'Portfolio'}
           </div>
 
           {/* Desktop Menu */}
@@ -51,6 +56,16 @@ const Navbar: React.FC = () => {
                 {item.name}
               </button>
             ))}
+            {resume && (
+              <a
+                href={resume}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-blue-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-blue-700 hover:scale-105 transition-all duration-200"
+              >
+                Resume
+              </a>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -76,6 +91,17 @@ const Navbar: React.FC = () => {
                 {item.name}
               </button>
             ))}
+            {resume && (
+              <a
+                href={resume}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full text-center mt-4 bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Resume
+              </a>
+            )}
           </div>
         )}
       </div>
