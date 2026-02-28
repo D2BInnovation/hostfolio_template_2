@@ -42,9 +42,13 @@ const Navbar: FC = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
-          <div className="text-2xl font-bold text-blue-600 hover:scale-105 transition-transform duration-200">
-            {personal?.name || 'Portfolio'}
+          <div className="flex items-center gap-3 group cursor-pointer" onClick={() => scrollToSection('#hero')}>
+            <img src="/assets/logo.png" alt="Logo" className="w-8 h-8 object-contain" />
+            <div className="text-2xl font-bold text-blue-600 group-hover:text-blue-500 transition-colors">
+              {personal?.name?.split(' ')[0] || 'Portfolio'}
+            </div>
           </div>
+
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8">
