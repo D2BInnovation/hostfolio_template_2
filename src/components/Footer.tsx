@@ -1,8 +1,8 @@
-import React from 'react'
+import type { FC } from 'react'
 import { Heart, Github, Linkedin, Mail, ArrowUp } from 'lucide-react'
 import data from '../../data.json'
 
-const Footer: React.FC = () => {
+const Footer: FC = () => {
   const { hero } = data
   const currentYear = new Date().getFullYear()
 
@@ -88,7 +88,7 @@ const Footer: React.FC = () => {
             <Heart size={16} className="text-red-500 animate-pulse" />
             <span>and React</span>
           </div>
-          
+
           <button
             onClick={scrollToTop}
             className="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full hover:scale-110 transition-all duration-200"

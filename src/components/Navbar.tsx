@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect, type FC } from 'react'
 import { Menu, X } from 'lucide-react'
 import type { PortfolioData } from '../types'
 import data from '../../data.json'
 
-const Navbar: React.FC = () => {
+const Navbar: FC = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 

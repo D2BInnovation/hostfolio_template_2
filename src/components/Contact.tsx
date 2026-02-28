@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import { useState, type FC } from 'react'
 import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, Instagram } from 'lucide-react'
 import data from '../../data.json'
 
-const Contact: React.FC = () => {
+const Contact: FC = () => {
   const { contact } = data as any
   const [formData, setFormData] = useState({
     name: '',

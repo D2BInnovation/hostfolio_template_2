@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import { useState, type FC } from 'react'
 import { Github, ExternalLink, Code, Star } from 'lucide-react'
 import data from '../../data.json'
 
-const Projects: React.FC = () => {
+const Projects: FC = () => {
   const { projects } = data as any;
   const { hero } = data as any;
   const [filter, setFilter] = useState('all')
@@ -38,8 +38,8 @@ const Projects: React.FC = () => {
                   key={filterOption}
                   onClick={() => setFilter(filterOption)}
                   className={`px-6 py-2 rounded-md font-medium transition-all duration-200 ${filter === filterOption
-                      ? 'bg-blue-600 text-white shadow-md'
-                      : 'text-gray-600 hover:text-blue-600'
+                    ? 'bg-blue-600 text-white shadow-md'
+                    : 'text-gray-600 hover:text-blue-600'
                     }`}
                 >
                   {filterOption.charAt(0).toUpperCase() + filterOption.slice(1)}

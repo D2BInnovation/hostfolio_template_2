@@ -1,8 +1,8 @@
-import React from 'react'
+import type { FC } from 'react'
 import { GraduationCap, Award, Code, User } from 'lucide-react'
 import data from '../../data.json'
 
-const About: React.FC = () => {
+const About: FC = () => {
   const { about } = data as any;
 
   return (
