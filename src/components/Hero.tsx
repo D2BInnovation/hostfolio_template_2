@@ -4,18 +4,24 @@ import data from '../../data.json'
 import type { PortfolioData } from '../types'
 
 const Hero: FC = () => {
-  const { hero } = data as PortfolioData;
+  const { hero, personal } = data as unknown as PortfolioData;
 
-  // Don't render section if hero data is not present
-  if (!hero) {
+  // Don't render section if no hero info is present
+  if (!hero && !personal) {
     return null;
   }
 
+  const name = personal?.name || hero?.name;
+  const title = personal?.title || hero?.title;
+  const description = hero?.description || personal?.bio;
+  const greeting = hero?.greeting || "Hi, I'm";
+  const resumeUrl = hero?.resumeUrl || personal?.resume || (data as any).resume;
+
   const socialLinks = [
-    { icon: Github, url: hero.social?.github, label: 'GitHub' },
-    { icon: Linkedin, url: hero.social?.linkedin, label: 'LinkedIn' },
-    { icon: Twitter, url: hero.social?.twitter, label: 'Twitter' },
-    { icon: Mail, url: hero.social?.email ? `mailto:${hero.social.email}` : '#', label: 'Email' }
+    { icon: Github, url: personal?.github || hero?.social?.github, label: 'GitHub' },
+    { icon: Linkedin, url: personal?.linkedin || hero?.social?.linkedin, label: 'LinkedIn' },
+    { icon: Mail, url: personal?.email || hero?.social?.email ? `mailto:${personal?.email || hero?.social?.email}` : '#', label: 'Email' },
+    { icon: Twitter, url: hero?.social?.twitter, label: 'Twitter' }
   ].filter(link => link.url);
 
   return (
@@ -25,47 +31,57 @@ const Hero: FC = () => {
           {/* Text Content */}
           <div className="text-center lg:text-left">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 animate-slideInLeft">
-              Hi, I'm{' '}
+              {greeting}{' '}
               <span className="text-blue-600 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                {hero.name}
+                {name}
               </span>
             </h1>
 
             <h2 className="text-xl sm:text-2xl text-gray-600 mb-4 animate-slideInLeft animation-delay-200">
-              {hero.title}
+              {title}
             </h2>
 
-            <h3 className="text-lg sm:text-xl text-blue-600 font-semibold mb-6 animate-slideInLeft animation-delay-400">
-              {hero.subtitle}
-            </h3>
+            {hero?.subtitle && (
+              <h3 className="text-lg sm:text-xl text-blue-600 font-semibold mb-6 animate-slideInLeft animation-delay-400">
+                {hero.subtitle}
+              </h3>
+            )}
 
             <p className="text-gray-700 text-lg mb-8 max-w-2xl animate-slideInLeft animation-delay-600">
-              {hero.description}
+              {description}
             </p>
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8 animate-slideInLeft animation-delay-800">
-              <a
-                href="#contact"
-                className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 hover:scale-105 transition-all duration-200 flex items-center justify-center gap-2"
-                onClick={(e) => {
-                  e.preventDefault()
-                  document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })
-                }}
-              >
-                <Mail size={20} />
-                Get In Touch
-              </a>
+              {/* Legacy or explicit Get In Touch button */}
+              {(hero?.primaryButton || (data as any).contact) && (
+                <a
+                  href={hero?.primaryButton?.link || "#contact"}
+                  className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 hover:scale-105 transition-all duration-200 flex items-center justify-center gap-2"
+                  onClick={(e) => {
+                    if (!hero?.primaryButton?.link || hero?.primaryButton?.link === '#contact') {
+                      e.preventDefault()
+                      document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })
+                    }
+                  }}
+                >
+                  <Mail size={20} />
+                  {hero?.primaryButton?.text || "Get In Touch"}
+                </a>
+              )}
 
-              <a
-                href={hero.resumeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-600 hover:text-white hover:scale-105 transition-all duration-200 flex items-center justify-center gap-2"
-              >
-                <Download size={20} />
-                Download Resume
-              </a>
+              {/* Legacy or Resume button */}
+              {(hero?.secondaryButton || resumeUrl) && (
+                <a
+                  href={hero?.secondaryButton?.link || resumeUrl}
+                  target={hero?.secondaryButton?.link ? undefined : "_blank"}
+                  rel={hero?.secondaryButton?.link ? undefined : "noopener noreferrer"}
+                  className="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-600 hover:text-white hover:scale-105 transition-all duration-200 flex items-center justify-center gap-2"
+                >
+                  {hero?.secondaryButton?.link ? null : <Download size={20} />}
+                  {hero?.secondaryButton?.text || "Download Resume"}
+                </a>
+              )}
             </div>
 
             {/* Social Links */}
@@ -90,8 +106,8 @@ const Hero: FC = () => {
             <div className="relative hover:scale-105 transition-transform duration-300">
               <div className="w-80 h-80 rounded-full overflow-hidden shadow-2xl bg-gradient-to-br from-blue-400 to-purple-500 p-1">
                 <img
-                  src={hero.image}
-                  alt={hero.name}
+                  src={hero?.image || "/api/placeholder/400/400"}
+                  alt={name}
                   className="w-full h-full object-cover rounded-full"
                 />
               </div>

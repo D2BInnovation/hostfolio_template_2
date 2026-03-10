@@ -1,20 +1,25 @@
 import type { FC } from 'react'
 import { Heart, Github, Linkedin, Mail, ArrowUp } from 'lucide-react'
 import data from '../../data.json'
+import type { PortfolioData } from '../types'
 
 const Footer: FC = () => {
-  const { hero } = data
+  const { hero, personal } = data as unknown as PortfolioData;
   const currentYear = new Date().getFullYear()
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
+  const name = personal?.name || hero?.name;
+  const title = personal?.title || hero?.title;
+  const email = personal?.email || hero?.social?.email;
+
   const socialLinks = [
-    { icon: Github, url: hero.social.github, label: 'GitHub' },
-    { icon: Linkedin, url: hero.social.linkedin, label: 'LinkedIn' },
-    { icon: Mail, url: `mailto:${hero.social.email}`, label: 'Email' }
-  ]
+    { icon: Github, url: personal?.github || hero?.social?.github, label: 'GitHub' },
+    { icon: Linkedin, url: personal?.linkedin || hero?.social?.linkedin, label: 'LinkedIn' },
+    { icon: Mail, url: email ? `mailto:${email}` : null, label: 'Email' }
+  ].filter(link => link.url) as any[];
 
   return (
     <footer className="bg-gray-900 text-white py-12 relative">
@@ -23,10 +28,10 @@ const Footer: FC = () => {
           {/* Brand */}
           <div className="text-center md:text-left">
             <h3 className="text-2xl font-bold text-blue-400 mb-4 hover:scale-105 transition-transform duration-200">
-              {hero.name}
+              {name}
             </h3>
             <p className="text-gray-400 mb-4">
-              {hero.title} passionate about creating innovative solutions and learning new technologies.
+              {title} passionate about creating innovative solutions and learning new technologies.
             </p>
             <div className="flex gap-4 justify-center md:justify-start">
               {socialLinks.map((social, index) => (
@@ -74,9 +79,8 @@ const Footer: FC = () => {
           <div className="text-center md:text-right">
             <h4 className="text-lg font-semibold mb-4">Get In Touch</h4>
             <div className="space-y-2 text-gray-400">
-              <p>{hero.social.email}</p>
-              <p>San Francisco, CA</p>
-              <p className="text-sm">Available for opportunities</p>
+              <p>{email}</p>
+              <p>{personal?.location || "Available for opportunities"}</p>
             </div>
           </div>
         </div>
@@ -84,7 +88,7 @@ const Footer: FC = () => {
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center gap-2 text-gray-400 mb-4 md:mb-0">
-            <span>© {currentYear} {hero.name}. Made with</span>
+            <span>© {currentYear} {name}. Made with</span>
             <Heart size={16} className="text-red-500 animate-pulse" />
             <span>and React</span>
           </div>

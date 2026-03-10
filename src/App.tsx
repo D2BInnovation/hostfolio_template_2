@@ -12,7 +12,7 @@ const Projects = lazy(() => import('./components/Projects'));
 const Contact = lazy(() => import('./components/Contact'));
 
 function App() {
-  const portfolioData = data as PortfolioData;
+  const portfolioData = data as unknown as PortfolioData;
 
   return (
     <div className="App">

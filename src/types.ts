@@ -1,11 +1,20 @@
 export interface HeroSection {
-  name: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  image: string;
-  resumeUrl: string;
-  social: {
+  name?: string;
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  image?: string;
+  resumeUrl?: string;
+  greeting?: string;
+  primaryButton?: {
+    text: string;
+    link: string;
+  };
+  secondaryButton?: {
+    text: string;
+    link: string;
+  };
+  social?: {
     github: string;
     linkedin: string;
     email: string;
@@ -20,10 +29,10 @@ export interface SkillCategory {
 }
 
 export interface AboutSection {
-  title: string;
-  description: string;
-  image: string;
-  skills: SkillCategory[];
+  title?: string;
+  description: string | string[];
+  image?: string;
+  skills: SkillCategory[] | string[];
 }
 
 export interface ProjectItem {
@@ -43,6 +52,11 @@ export interface ContactSection {
   email: string;
   phone?: string;
   location?: string;
+  socialLinks?: Array<{
+    platform: string;
+    url: string;
+    icon: string;
+  }>;
   social?: {
     github?: string;
     linkedin?: string;
@@ -52,10 +66,22 @@ export interface ContactSection {
 }
 
 export interface PortfolioData {
+  personal?: {
+    name: string;
+    title: string;
+    bio: string;
+    email: string;
+    phone: string;
+    location: string;
+    website: string;
+    linkedin: string;
+    github: string;
+    resume?: string;
+  };
   hero: HeroSection;
   about: AboutSection;
   projects: ProjectItem[];
+  experience: any[];
   contact: ContactSection;
   resume?: string;
-  personal?: any;
 }

@@ -15,7 +15,7 @@ const Navbar: FC = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const { personal, about, projects, contact, hero, resume } = (data as PortfolioData)
+  const { personal, about, projects, contact, hero, resume } = (data as unknown as PortfolioData)
 
   const navItems = []
   if (hero) navItems.push({ name: 'Home', href: '#hero' })
